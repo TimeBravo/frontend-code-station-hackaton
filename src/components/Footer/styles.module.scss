@@ -1,0 +1,57 @@
+.footer {
+  width: 100%;
+  height: 56px;
+  border-top: 1px solid var(--primary-500);
+  background-color: var(--primary-500);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 24px;
+
+    span {
+      margin-right: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .logo {
+    height: 1em;
+    margin-left: 0.5rem;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .footer {
+    height: 56px;
+  }
+}
+
+/* Caso seja dispositivo com baixa resolução não exibe rodapé */
+@media (max-width: 720px) {
+  .footer {
+    height: 0px;
+    border: none;
+    a {
+      font-size: 0px;
+    }
+    .logo {
+      img {
+        width: 0px;
+        height: 0px;
+      }
+    }
+  }
+}

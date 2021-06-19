@@ -1,0 +1,18 @@
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary-50);
+  font-size: 30px;
+  line-height: 30px;
+  color: var(--white);
+  box-shadow: 2px 4px 4px var(--primary-300);
+
+  &:active {
+    box-shadow: 1px 1px 1px var(--primary-400);
+  }
+}
