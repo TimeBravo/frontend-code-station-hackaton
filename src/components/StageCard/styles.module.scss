@@ -1,0 +1,145 @@
+.actualCard {
+  height: 50vh;
+  width: 40vw;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 18vw 22vw;
+  background: var(--secondary-50);
+  color: var(--primary-700);
+  box-shadow: 4px 4px 8px var(--secondary-400);
+  position: absolute;
+  z-index: 3;
+  h2 {
+    grid-column: span 2;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh;
+    color: var(--primary-800);
+  }
+  p {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 2.5vh;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 2vh 0 2vh 3vh;
+    width: 18vw;
+    height: 40vh;
+    white-space: pre-wrap;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 20vw;
+      border: 5px solid var(--primary-300);
+      border-radius: 2vh;
+    }
+  }
+}
+
+.previousCard {
+  height: 25vh;
+  width: 20vw;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-50);
+  color: var(--primary-700);
+  box-shadow: 4px 4px 8px var(--secondary-400);
+  position: absolute;
+  z-index: 1;
+  right: 65vw;
+}
+
+.nextCard {
+  height: 25vh;
+  width: 20vw;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-50);
+  color: var(--primary-700);
+  box-shadow: 4px 4px 8px var(--secondary-400);
+  position: absolute;
+  z-index: 2;
+  left: 65vw;
+}
+
+@media (max-width: 720px) {
+  .actualCard {
+    width: 90vw;
+    height: 70vh;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--secondary-50);
+    color: var(--primary-700);
+    box-shadow: 4px 4px 8px var(--secondary-400);
+    position: absolute;
+    z-index: 3;
+
+    div {
+      grid-row: 1;
+      img {
+        width: 90vw;
+        border: 0;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+
+    h2 {
+      height: 8vh;
+      font-size: 4vh;
+      position: relative;
+      grid-row: 2;
+      color: var(--primary-800);
+    }
+
+    p {
+      width: 90vw;
+      height: 35vh;
+      position: relative;
+      grid-row: 3;
+      padding: 2vh 1vh 2vh 1vh;
+      color: var(--primary-800);
+    }
+  }
+
+  .previousCard {
+    width: 90vw;
+    height: 70vh;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-50);
+    color: var(--primary-700);
+    box-shadow: 4px 4px 8px var(--secondary-400);
+    position: absolute;
+    z-index: 1;
+    left: 5vw;
+  }
+
+  .nextCard {
+    width: 90vw;
+    height: 70vh;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-50);
+    color: var(--primary-700);
+    box-shadow: 4px 4px 8px var(--secondary-400);
+    position: absolute;
+    z-index: 2;
+    left: 5vw;
+  }
+}

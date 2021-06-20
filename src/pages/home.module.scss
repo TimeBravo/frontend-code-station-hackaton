@@ -3,21 +3,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
+  width: 100%;
+  height: 69vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   .stageButtonsContainer {
-    width: 100%;
-    height: 100px;
+    width: 50%;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -30,9 +30,19 @@
   font-size: 4rem;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+@media (max-width: 720px) {
+  .main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .stageButtonsContainer {
+      width: 95%;
+      height: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
   }
 }

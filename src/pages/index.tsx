@@ -3,12 +3,103 @@ import styles from './home.module.scss';
 
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { StageCardContainer } from '../components/StageCardContainer';
+import { StageCard } from '../components/StageCard';
 import {
   NextStageButton,
   PreviousStageButton,
 } from '../components/StageButton';
 
-export default function Home() {
+export default function Home(): JSX.Element {
+  const resposta = {
+    id: '1df461ae-2aa3-41f6-9276-c7d2b74d9553',
+    clientName: 'Roberto Assis da Silva',
+    clientEmail: null,
+    clientPhone: '+5517992601670',
+    productName: 'Esteira de seleção UHK-9000',
+    isCompleted: false,
+    createdAt: '2021-06-17T03:19:00.000Z',
+    updatedAt: '2021-06-17T03:19:00.000Z',
+    stages: [
+      {
+        status: 'COMPLETED',
+        id: '060873c5-6ee5-4d09-8c61-bb74abcf7a03',
+        name: 'Pedido Implantado',
+        photos: [
+          'https://wfa.com.br/wp-content/uploads/2018/06/comprar-equipamento-industrial-wfa.jpg',
+          'https://wfa.com.br/wp-content/uploads/2018/08/comprar-equipamento-industrial-wfa.jpg',
+          'https://blog.kalatec.com.br/wp-content/uploads/2021/01/equipamentos-industriais.jpg',
+        ],
+        stageDescription:
+          'Implantação do pedido em nosso ERP\nCompras de materiais\nAjustes do projeto\nAjustes do projeto\nAjustes do projeto\nAjustes do projeto',
+      },
+      {
+        status: 'COMPLETED',
+        id: '060873c5-6ee5-4d09-8c61-bb74abcf7a03',
+        name: 'Corte e Dobra',
+        photos: null,
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+      {
+        status: 'WAITING',
+        id: '2d40819f-d58a-45e7-b095-52ff8b25f2d7',
+        name: 'Pintura',
+        photos: null,
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+      {
+        status: 'WAITING',
+        id: '67a86c70-4acc-450f-8028-85eeb2e18a28',
+        name: 'Montagem',
+        photos: null,
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+      {
+        status: 'WAITING',
+        id: '87373156-ed5e-41a9-a1db-5f416086e88d',
+        name: 'Polimento',
+        photos: null,
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+      {
+        status: 'WAITING',
+        id: 'e2167722-680d-4dac-83d1-8511efdb6ed5',
+        name: 'Soldagem',
+        photos: null,
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+      {
+        status: 'WAITING',
+        id: '00c61ca5-7998-447f-adc8-92aada2730e0',
+        name: 'Expedição',
+        photos: [
+          'http://exemplo.com/exemplo',
+          'http://exemplo.com/exemplo',
+          'http://exemplo.com/exemplo',
+        ],
+        stageDescription:
+          'Agrupamento de todas as peças cortadas e dobradas para montagem',
+      },
+    ],
+  };
+  const { stages } = resposta;
+  const completedStages = stages.filter(stage => {
+    if (stage.status === 'COMPLETED') return stage;
+    return null;
+  });
+  const actualStage = completedStages[completedStages.length - 1];
+  // console.log('actualStage', actualStage);
+  // const futureStages = stages.filter(stage => {
+  //  if (stage.status === 'WAITING') return stage;
+  //  return null;
+  // });
+  // console.log('futureStages', futureStages);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +111,17 @@ export default function Home() {
       <Header />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>StageView - TimeBravo teste</h1>
+        <StageCardContainer>
+          <StageCard
+            step="actual"
+            status={actualStage.status}
+            id={actualStage.id}
+            name={actualStage.name}
+            photos={actualStage.photos}
+            stageDescription={actualStage.stageDescription}
+          />
+        </StageCardContainer>
+
         <nav className={styles.stageButtonsContainer}>
           <PreviousStageButton /> <NextStageButton />
         </nav>
