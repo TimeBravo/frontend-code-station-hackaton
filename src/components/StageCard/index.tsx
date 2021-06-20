@@ -20,13 +20,23 @@ export function StageCard(props: CardProps): JSX.Element {
   } else {
     images = ['/semFoto.jpg'];
   }
+  let statusString: string;
+  if (status === 'WAITING') {
+    statusString = 'Etapa Futura';
+  }
+  if (status === 'STARTED') {
+    statusString = 'Em andamento';
+  }
+  if (status === 'FINISHED') {
+    statusString = 'Concluída';
+  }
 
   if (images[0] === null || images[0] === undefined) images = ['/semFoto.jpg'];
 
   return (
     <div className={styles.actualCard}>
       <h2>
-        {name} - {status !== 'WAITING' ? 'Concluída' : 'Etapa Futura'}
+        {name} - {statusString}
       </h2>
 
       <p>
