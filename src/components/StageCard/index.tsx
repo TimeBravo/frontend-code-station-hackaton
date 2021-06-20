@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { FiZoomIn } from 'react-icons/fi';
 import { GalleryModal } from '../GalleryModal';
+
 import styles from './styles.module.scss';
 
 interface CardProps {
@@ -33,6 +35,9 @@ export function StageCard(props: CardProps): JSX.Element {
       <button onClick={() => setGalleryIsOpen(true)} type="button">
         <div>
           <img src={images[0]} alt="Foto" />
+          <span>
+            <FiZoomIn />
+          </span>
         </div>
       </button>
       <GalleryModal

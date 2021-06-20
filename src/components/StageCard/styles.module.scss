@@ -32,18 +32,28 @@
     height: 40vh;
     white-space: pre-wrap;
   }
-  
+
   button {
+    max-height: 35vh;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     background: none;
-
     img {
-      width: 20vw;
+      max-height: 35vh;
       border: 5px solid var(--primary-300);
       border-radius: 2vh;
+    }
+    span {
+      width: 20px;
+      height: 20px;
+      font-size: 30px;
+      color: var(--primary-700);
+      position: relative;
+      right: 40px;
+      bottom: 10px;
+      z-index: 100;
     }
   }
 }
@@ -63,11 +73,23 @@
 
     button {
       grid-row: 1;
-      
+      max-height: 30vh;
+      overflow: hidden;
+
       img {
         width: 90vw;
+        height: auto;
         border: 0;
         border-radius: 5px 5px 0 0;
+      }
+      span {
+        width: 20px;
+        height: 20px;
+        font-size: 30px;
+        color: var(--primary-700);
+        position: relative;
+        left: 40%;
+        bottom: 50px;
       }
     }
 
