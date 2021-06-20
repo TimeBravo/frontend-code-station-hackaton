@@ -139,9 +139,7 @@ export default function Home(): JSX.Element {
         {actualStageState && (
           <StageCardContainer>
             <StageCard
-              step="actual"
               status={actualStageState.status}
-              id={actualStageState.id}
               name={actualStageState.name}
               photos={actualStageState.photos}
               stageDescription={actualStageState.stageDescription}
