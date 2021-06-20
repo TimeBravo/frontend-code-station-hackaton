@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from './home.module.scss';
 
@@ -9,7 +10,6 @@ import {
   NextStageButton,
   PreviousStageButton,
 } from '../components/StageButton';
-import { useEffect, useState } from 'react';
 
 export default function Home(): JSX.Element {
   const resposta = {
@@ -108,15 +108,15 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     setActualStageState(stages[actualStageIndex]);
-  }, [actualStageIndex]);
+  }, [actualStageIndex, stages]);
 
-  const handlePreviousStage = () => {
+  const handlePreviousStage = (): void => {
     if (actualStageIndex > 0) {
       setActualStageIndex(actualStageIndex - 1);
     }
   };
 
-  const handleNextStage = () => {
+  const handleNextStage = (): void => {
     if (actualStageIndex < stages.length - 1) {
       setActualStageIndex(actualStageIndex + 1);
     }
