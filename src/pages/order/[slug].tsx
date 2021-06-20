@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
 import { StageCardContainer } from '../../components/StageCardContainer';
 import { StageCard } from '../../components/StageCard';
 import {
@@ -20,8 +22,8 @@ type Order = {
     {
       status: string;
       name: string;
-      stageDescription: string;
-      photos: string[] | null;
+      description: string;
+      pictures_url: string[] | null;
     }
   ];
 };
@@ -30,9 +32,10 @@ interface OrderProps {
   order: Order;
 }
 
-export default function Order({ order }: OrderProps) {
-  const completedStages = order.stages.filter(stage => {
-    if (stage.status === 'COMPLETED') return stage;
+export default function Order({ order }: OrderProps): JSX.Element {
+  const { stages } = order;
+  const completedStages = stages.filter(stage => {
+    if (stage.status === 'FINISHED') return stage;
     return null;
   });
   const actualStage = completedStages[completedStages.length - 1];
@@ -42,8 +45,8 @@ export default function Order({ order }: OrderProps) {
   const [actualStageState, setActualStageState] = useState(actualStage);
 
   useEffect(() => {
-    setActualStageState(order.stages[actualStageIndex]);
-  }, [actualStageIndex, order.stages]);
+    setActualStageState(stages[actualStageIndex]);
+  }, [actualStageIndex, stages]);
 
   const handlePreviousStage = (): void => {
     if (actualStageIndex > 0) {
@@ -52,7 +55,7 @@ export default function Order({ order }: OrderProps) {
   };
 
   const handleNextStage = (): void => {
-    if (actualStageIndex < order.stages.length - 1) {
+    if (actualStageIndex < stages.length - 1) {
       setActualStageIndex(actualStageIndex + 1);
     }
   };
@@ -62,19 +65,19 @@ export default function Order({ order }: OrderProps) {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <Head>
         <title>StageView - TimeBravo</title>
       </Head>
-
+      <Header />
       <main className={styles.main}>
         {actualStageState && (
           <StageCardContainer>
             <StageCard
               status={actualStageState.status}
               name={actualStageState.name}
-              photos={actualStageState.photos}
-              stageDescription={actualStageState.stageDescription}
+              photos={actualStageState.pictures_url}
+              stageDescription={actualStageState.description}
             />
           </StageCardContainer>
         )}
@@ -85,14 +88,15 @@ export default function Order({ order }: OrderProps) {
           ) : (
             <div style={spacer} />
           )}
-          {actualStageIndex < order.stages.length - 1 ? (
+          {actualStageIndex < stages.length - 1 ? (
             <NextStageButton onClick={handleNextStage} />
           ) : (
             <div style={spacer} />
           )}
         </nav>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
 
@@ -111,21 +115,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   const response = await api.get(`order/${slug}`);
 
-  console.log(response);
+  console.log(JSON.stringify(response.data, null, 2));
 
   const order = {
     slug,
     productName: response.data.productName,
     clientName: response.data.clientName,
     clientEmail: response.data.clientEmail,
-    stages: [
-      {
-        status: response.data.status,
-        name: response.data.name,
-        description: response.data.description,
-        pictures_url: response.data.pictures_url,
-      },
-    ],
+    stages: response.data.stages,
   };
 
   return {

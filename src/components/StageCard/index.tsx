@@ -12,7 +12,14 @@ interface CardProps {
 export function StageCard(props: CardProps): JSX.Element {
   const { name, photos, stageDescription } = props;
   const [galleryIsOpen, setGalleryIsOpen] = useState(false);
-  const images = photos !== null ? photos : ['/semFoto.jpg'];
+  let images;
+  if (photos !== null) {
+    images = photos;
+  } else {
+    images = ['/semFoto.jpg'];
+  }
+
+  if (images[0] === null || images[0] === undefined) images = ['/semFoto.jpg'];
 
   return (
     <div className={styles.actualCard}>
@@ -25,11 +32,7 @@ export function StageCard(props: CardProps): JSX.Element {
       </p>
       <button onClick={() => setGalleryIsOpen(true)} type="button">
         <div>
-          {photos !== null ? (
-            <img src={photos[0]} alt="Foto" />
-          ) : (
-            <img src="/semFoto.jpg" alt="Sem Foto" />
-          )}
+          <img src={images[0]} alt="Foto" />
         </div>
       </button>
       <GalleryModal
