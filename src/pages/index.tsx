@@ -5,7 +5,7 @@ import styles from './home.module.scss';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { StageCardContainer } from '../components/StageCardContainer';
-import { StageCard } from '../components/StageCard';
+import { StageCardSpecial } from '../components/StageCardSpecial';
 import {
   NextStageButton,
   PreviousStageButton,
@@ -15,37 +15,57 @@ export default function Home(): JSX.Element {
   const resposta = {
     members: [
       {
-        status: 'COMPLETED',
+        status: 'FINISHED',
+        name: 'StageView',
+        pictures_url: ['/StageView.jpg'],
+        description:
+          'Aplicação desenvolvida para o Code/Station Hackaton pelo Time Bravo.\n\nPara saber mais, clique no botão > \npara avançar.',
+      },
+      {
+        status: 'WAITING',
+        name: 'O que é o StageView',
+        pictures_url: ['/StageView.jpg'],
+        description:
+          'O objetivo do StageView é permitir que fabricantes de máquinas sob encomenda, disponibilizem o status do pedido ao cliente final, conforme as etapas de produção avançam.\n\nPara conhecer os desenvolvedores, clique no botão > para avançar.',
+      },
+      {
+        status: 'WAITING',
         name: 'Alexandre Marinho',
         pictures_url: ['https://avatars.githubusercontent.com/u/41836961?v=4'],
         description: 'Responsável pelo o desenvolvimento do\nBackend em nodejs',
       },
       {
-        status: 'COMPLETED',
+        status: 'WAITING',
         name: 'Thomas Vieira',
         pictures_url: ['https://avatars.githubusercontent.com/u/45882203?v=4'],
         description:
           'Responsável pelo o desenvolvimento do\nFrontend Web em Nextjs',
       },
       {
-        status: 'COMPLETED',
+        status: 'WAITING',
         name: 'Victor Novais',
         pictures_url: ['https://avatars.githubusercontent.com/u/32309553?v=4'],
         description:
           'Responsável pelo o desenvolvimento do\nMobile em react native',
       },
       {
-        status: 'COMPLETED',
+        status: 'WAITING',
         name: 'Weverton Cintra',
         pictures_url: ['https://avatars.githubusercontent.com/u/33919003?v=4'],
         description:
-          'Responsável pelo o desenvolvimento do\nFrontend Web em Nextjs e axiliou no Backend',
+          'Responsável pelo o desenvolvimento do\nFrontend Web em Nextjs e Backend',
       },
     ],
   };
   const { members } = resposta;
-  const actualStage = members[members.length - 1];
-  const [actualStageIndex, setActualStageIndex] = useState(members.length - 1);
+  const completedStages = members.filter(stage => {
+    if (stage.status === 'FINISHED') return stage;
+    return null;
+  });
+  const actualStage = completedStages[completedStages.length - 1];
+  const [actualStageIndex, setActualStageIndex] = useState(
+    completedStages.length - 1
+  );
   const [actualStageState, setActualStageState] = useState(actualStage);
 
   useEffect(() => {
@@ -77,7 +97,7 @@ export default function Home(): JSX.Element {
       <main className={styles.main}>
         {actualStageState && (
           <StageCardContainer>
-            <StageCard
+            <StageCardSpecial
               status={actualStageState.status}
               name={actualStageState.name}
               photos={actualStageState.pictures_url}
