@@ -30,10 +30,12 @@
     height: 40vh;
     white-space: pre-wrap;
   }
-  div {
+  button {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    background: none;
 
     img {
       width: 20vw;
@@ -86,7 +88,7 @@
     position: absolute;
     z-index: 3;
 
-    div {
+    button {
       grid-row: 1;
       img {
         width: 90vw;

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { GalleryModal } from '../GalleryModal';
 import styles from './styles.module.scss';
 
 interface CardProps {
@@ -11,6 +13,9 @@ interface CardProps {
 
 export function StageCard(props: CardProps): JSX.Element {
   const { step, name, photos, stageDescription } = props;
+
+  const [galleryIsOpen, setGalleryIsOpen] = useState(false);
+  const images = photos !== null ? photos : ['/semFoto.jpg'];
   if (step === 'previous') {
     return (
       <div className={styles.previousCard}>
@@ -60,13 +65,20 @@ export function StageCard(props: CardProps): JSX.Element {
         {'\n\n'}
         {stageDescription}
       </p>
-      <div>
-        {photos !== null ? (
-          <img src={photos[0]} alt="Foto" />
-        ) : (
-          <img src="/semFoto.jpg" alt="Sem Foto" />
-        )}
-      </div>
+      <button onClick={() => setGalleryIsOpen(true)} type="button">
+        <div>
+          {photos !== null ? (
+            <img src={photos[0]} alt="Foto" />
+          ) : (
+            <img src="/semFoto.jpg" alt="Sem Foto" />
+          )}
+        </div>
+      </button>
+      <GalleryModal
+        galleryIsOpen={galleryIsOpen}
+        setGalleryIsOpen={setGalleryIsOpen}
+        images={images}
+      />
     </div>
   );
 }
