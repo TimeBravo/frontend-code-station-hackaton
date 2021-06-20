@@ -9,6 +9,7 @@ import {
   NextStageButton,
   PreviousStageButton,
 } from '../components/StageButton';
+import { useEffect, useState } from 'react';
 
 export default function Home(): JSX.Element {
   const resposta = {
@@ -34,10 +35,13 @@ export default function Home(): JSX.Element {
           'Implantação do pedido em nosso ERP\nCompras de materiais\nAjustes do projeto\nAjustes do projeto\nAjustes do projeto\nAjustes do projeto',
       },
       {
-        status: 'COMPLETED',
+        status: 'WAITING',
         id: '060873c5-6ee5-4d09-8c61-bb74abcf7a03',
         name: 'Corte e Dobra',
-        photos: null,
+        photos: [
+          'https://wfa.com.br/wp-content/uploads/2018/08/comprar-equipamento-industrial-wfa.jpg',
+          'https://blog.kalatec.com.br/wp-content/uploads/2021/01/equipamentos-industriais.jpg',
+        ],
         stageDescription:
           'Agrupamento de todas as peças cortadas e dobradas para montagem',
       },
@@ -45,7 +49,9 @@ export default function Home(): JSX.Element {
         status: 'WAITING',
         id: '2d40819f-d58a-45e7-b095-52ff8b25f2d7',
         name: 'Pintura',
-        photos: null,
+        photos: [
+          'https://blog.kalatec.com.br/wp-content/uploads/2021/01/equipamentos-industriais.jpg',
+        ],
         stageDescription:
           'Agrupamento de todas as peças cortadas e dobradas para montagem',
       },
@@ -77,11 +83,7 @@ export default function Home(): JSX.Element {
         status: 'WAITING',
         id: '00c61ca5-7998-447f-adc8-92aada2730e0',
         name: 'Expedição',
-        photos: [
-          'http://exemplo.com/exemplo',
-          'http://exemplo.com/exemplo',
-          'http://exemplo.com/exemplo',
-        ],
+        photos: null,
         stageDescription:
           'Agrupamento de todas as peças cortadas e dobradas para montagem',
       },
@@ -93,6 +95,10 @@ export default function Home(): JSX.Element {
     return null;
   });
   const actualStage = completedStages[completedStages.length - 1];
+  const [actualStageIndex, setActualStageIndex] = useState(
+    completedStages.length - 1
+  );
+  const [actualStageState, setActualStageState] = useState(actualStage);
   // console.log('actualStage', actualStage);
   // const futureStages = stages.filter(stage => {
   //  if (stage.status === 'WAITING') return stage;
@@ -100,6 +106,25 @@ export default function Home(): JSX.Element {
   // });
   // console.log('futureStages', futureStages);
 
+  useEffect(() => {
+    setActualStageState(stages[actualStageIndex]);
+  }, [actualStageIndex]);
+
+  const handlePreviousStage = () => {
+    if (actualStageIndex > 0) {
+      setActualStageIndex(actualStageIndex - 1);
+    }
+  };
+
+  const handleNextStage = () => {
+    if (actualStageIndex < stages.length - 1) {
+      setActualStageIndex(actualStageIndex + 1);
+    }
+  };
+
+  const spacer = {
+    width: '14vh',
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -111,19 +136,30 @@ export default function Home(): JSX.Element {
       <Header />
 
       <main className={styles.main}>
-        <StageCardContainer>
-          <StageCard
-            step="actual"
-            status={actualStage.status}
-            id={actualStage.id}
-            name={actualStage.name}
-            photos={actualStage.photos}
-            stageDescription={actualStage.stageDescription}
-          />
-        </StageCardContainer>
+        {actualStageState && (
+          <StageCardContainer>
+            <StageCard
+              step="actual"
+              status={actualStageState.status}
+              id={actualStageState.id}
+              name={actualStageState.name}
+              photos={actualStageState.photos}
+              stageDescription={actualStageState.stageDescription}
+            />
+          </StageCardContainer>
+        )}
 
         <nav className={styles.stageButtonsContainer}>
-          <PreviousStageButton /> <NextStageButton />
+          {actualStageIndex > 0 ? (
+            <PreviousStageButton onClick={handlePreviousStage} />
+          ) : (
+            <div style={spacer} />
+          )}
+          {actualStageIndex < stages.length - 1 ? (
+            <NextStageButton onClick={handleNextStage} />
+          ) : (
+            <div style={spacer} />
+          )}
         </nav>
       </main>
 
