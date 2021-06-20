@@ -45,7 +45,7 @@
     overflow: hidden;
     img {
       max-width: 20vw;
-      max-height: 35vh;
+      max-height: 33vh;
       border: 5px solid var(--primary-300);
       border-radius: 2vh;
     }
@@ -61,6 +61,7 @@
 
 @media (max-width: 720px) {
   .actualCard {
+    margin-top: 0;
     width: 90vw;
     height: 70vh;
     border-radius: 5px;
@@ -73,24 +74,26 @@
     z-index: 3;
 
     button {
+      margin: 0;
       grid-row: 1;
+      width: 90vw;
+      max-width: 90vw;
       max-height: 30vh;
       overflow: hidden;
+      border-radius: 5px 5px 0 0;
 
-      img {
-        width: 90vw;
-        height: auto;
-        border: 0;
-        border-radius: 5px 5px 0 0;
-      }
-      span {
-        width: 20px;
-        height: 20px;
-        font-size: 30px;
-        color: var(--primary-700);
-        position: relative;
-        left: 40%;
-        bottom: 50px;
+      div {
+        img {
+          width: 90vw;
+          max-width: 90vw;
+          border: 0;
+          border-radius: 5px 5px 0 0;
+        }
+        span {
+          width: 0;
+          height: 0;
+          left: 35vw;
+        }
       }
     }
 

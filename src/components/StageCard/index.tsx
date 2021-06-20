@@ -12,7 +12,7 @@ interface CardProps {
 }
 
 export function StageCard(props: CardProps): JSX.Element {
-  const { name, photos, stageDescription } = props;
+  const { name, status, photos, stageDescription } = props;
   const [galleryIsOpen, setGalleryIsOpen] = useState(false);
   let images;
   if (photos !== null) {
@@ -25,7 +25,9 @@ export function StageCard(props: CardProps): JSX.Element {
 
   return (
     <div className={styles.actualCard}>
-      <h2>{name}</h2>
+      <h2>
+        {name} - {status !== 'WAITING' ? 'Concluída' : 'Etapa Futura'}
+      </h2>
 
       <p>
         Nesta etapa:
