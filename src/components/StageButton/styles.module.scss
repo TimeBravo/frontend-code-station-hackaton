@@ -2,17 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 40px;
+  width: 14vh;
+  height: 7vh;
   border: none;
-  border-radius: 4px;
+  border-radius: 1vh;
   background: var(--primary-50);
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 6vh;
+  line-height: 6vh;
   color: var(--white);
   box-shadow: 2px 4px 4px var(--primary-300);
 
   &:active {
     box-shadow: 1px 1px 1px var(--primary-400);
+    transform: translateY(2px);
   }
 }

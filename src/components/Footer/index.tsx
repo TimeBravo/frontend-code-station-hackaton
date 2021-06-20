@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 
-export function Footer() {
+export function Footer(): JSX.Element {
   return (
     <footer className={styles.footer}>
       <a

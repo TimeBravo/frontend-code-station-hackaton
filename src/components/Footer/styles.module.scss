@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  height: 56px;
+  height: 8vh;
   border-top: 1px solid var(--primary-500);
   background-color: var(--primary-500);
   display: flex;
@@ -12,10 +12,10 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    font-size: 24px;
+    font-size: 2.8vh;
 
     span {
-      margin-right: 8px;
+      margin-right: 0.4vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,34 +23,28 @@
   }
 
   .logo {
-    height: 1em;
-    margin-left: 0.5rem;
+    height: 5vh;
+    margin-left: 0.4vw;
     img {
-      width: 32px;
-      height: 32px;
+      width: 5vh;
+      height: 5vh;
       border-radius: 50%;
     }
-  }
-}
-
-@media (max-width: 1080px) {
-  .footer {
-    height: 56px;
   }
 }
 
 /* Caso seja dispositivo com baixa resolução não exibe rodapé */
 @media (max-width: 720px) {
   .footer {
-    height: 0px;
+    height: 0;
     border: none;
     a {
-      font-size: 0px;
+      font-size: 0;
     }
     .logo {
       img {
-        width: 0px;
-        height: 0px;
+        width: 0;
+        height: 0;
       }
     }
   }
