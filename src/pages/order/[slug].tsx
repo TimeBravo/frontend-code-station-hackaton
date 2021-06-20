@@ -35,7 +35,7 @@ interface OrderProps {
 export default function Order({ order }: OrderProps): JSX.Element {
   const { stages } = order;
   const completedStages = stages.filter(stage => {
-    if (stage.status === 'FINISHED') return stage;
+    if (stage.status === 'FINISHED' || stage.status === 'STARTED') return stage;
     return null;
   });
   const actualStage = completedStages[completedStages.length - 1];
@@ -102,20 +102,8 @@ export default function Order({ order }: OrderProps): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params;
-  console.log(slug);
-
-  // const signinToken = await api.post('authenticate', {
-  //  email: 'alexandre.masj@gmail.com',
-  //  password: 'eganmuw6',
-  // });
-
-  // const response = await api.get(`order/${slug}`, {
-  // headers: { Authorization: `Bearer ${signinToken}` },
-  // });
 
   const response = await api.get(`order/${slug}`);
-
-  console.log(JSON.stringify(response.data, null, 2));
 
   const order = {
     slug,
